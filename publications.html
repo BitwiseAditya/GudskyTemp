@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gudsky Research Foundation — Publications</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #0f172a;
+      --gap: 1.25rem;
+      --radius: 12px;
+      --maxw: 1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--accent);
+      line-height: 1.5
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 48px auto;
+      padding: 24px
+    }
+
+    header.page-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 28px
+    }
+
+    header .logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0ea5a3, #2563eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(20px, 3vw, 28px)
+    }
+
+    header p {
+      margin: 2px 0 0;
+      color: var(--muted)
+    }
+
+    nav.simple-nav {
+      display: flex;
+      gap: 12px;
+      margin: 18px 0
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px
+    }
+
+    nav a.active {
+      background: #eef2ff;
+      color: #3730a3
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap)
+    }
+
+    @media(min-width:900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    .pub-card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(16, 24, 40, 0.06);
+      transform: translateY(16px);
+      opacity: 0;
+      transition: all 600ms cubic-bezier(.22, .9, .35, 1);
+      border: 1px solid rgba(15, 23, 42, 0.04)
+    }
+
+    .pub-card.visible {
+      transform: none;
+      opacity: 1
+    }
+
+    .pub-title {
+      font-weight: 700;
+      margin: 0 0 8px;
+      font-size: 16px
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px
+    }
+
+    .abstract {
+      font-size: 14px;
+      color: #111827;
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.03));
+      padding: 12px;
+      border-radius: 8px
+    }
+
+    .links {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .links a {
+      font-size: 13px;
+      color: #1e40af;
+      text-decoration: none;
+      border: 1px dashed rgba(30, 64, 175, 0.08);
+      padding: 6px 8px;
+      border-radius: 8px
+    }
+
+    footer {
+      margin: 40px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center
+    }
+
+    /* small header accent */
+    .strip {
+      height: 6px;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      border-radius: 6px;
+      margin-bottom: 18px
+    }
+
+    /* subtle floating effect for header */
+    .hero {
+      padding: 18px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(16, 24, 40, 0.03);
+    }
+
+    /* small table of contents */
+    .toc {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0
+    }
+
+    .toc button {
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, 0.04);
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="page-header hero">
+      <div>
+        <h1>Publications — Gudsky Research Foundation</h1>
+        <p>All research publications and project summaries produced with the support of the foundation. (Certified
+          Sources)</p>
+      </div>
+    </header>
+
+    <div class="strip"></div>
+
+    <nav class="simple-nav">
+      <a class="active">All</a>
+      <a>Conferences</a>
+      <a>Journals</a>
+      <a>Books</a>
+    </nav>
+
+    <div class="toc">
+      <button onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">Employing Machine Learning to
+        Track Students' Academic Progress</button>
+      <button onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">IoT-based AI Surveillance
+        Car</button>
+      <button onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">IoT Smart Irrigation</button>
+      <button onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">Interference Mitigation
+        (Book)</button>
+    </div>
+
+    <main class="grid" id="publicationsList">
+
+      <!-- Publication 1 -->
+      <article class="pub-card" id="p1">
+        <h2 class="pub-title">Paper Title: Employing Machine Learning to Track Students' Academic Progress and Learning
+          Outcomes Across Schools.</h2>
+        <div class="meta">Authors: Amrendra Singh Maan, Gagandeep Singh, Abhishek Kumar Shukla — Mentor: Prof. Ashish
+          Bhateja — Presented at: National Conference on Internet of Things, NIT Kurukshetra — Date: February 25, 2023 —
+          Vanue: NIT (Kurushetra)</div>
+        <div class="abstract">Abstract: This paper focuses on tracking students' academic progress and learning outcomes
+          in real-time across schools. The research introduces a desktop-based Learning Management System (LMS)
+          integrated with machine learning (ML) algorithms. The LMS supports various tasks, including attendance
+          tracking, assignment and quiz preparation, subject-specific mark analysis, and automated notifications for
+          teachers and parents. By automating routine activities, the system reduces manual workload for both students
+          and teachers, enhancing overall efficiency.</div>
+        <div class="links">
+          <a href="#">Certificate: NA</a>
+        </div>
+      </article>
+
+      <!-- Publication 2 -->
+      <article class="pub-card" id="p2">
+        <h2 class="pub-title">Paper Title: Design and Implementation of an IoT-based AI Surveillance Car with Obstacle
+          Detection, Line Following, and Live Streaming</h2>
+        <div class="meta">Authors: Arbab Ali, Kuldeep Kaur, Noor Ul Ain — Mentor: Abhishek Kumar Shukla — Conference:
+          2023 Third International Conference on Secure Cyber Computing and Communication (ICSCCC) — Date: July 14, 2023
+          — Vanue: Publication - NIT (Jalhander)</div>
+        <div class="abstract">Abstract: This research paper presents the design and implementation of an AI surveillance
+          car capable of object detection, line following, and live streaming. Leveraging Internet of Things (IoT)
+          technology, the car can be remotely controlled and monitored. Key features include real-time object detection
+          for tracking surrounding objects, line following for navigating predefined paths, and live streaming for
+          remote camera access. Experimental results demonstrate accurate obstacle detection, reliable line following,
+          and high-quality live streaming. The study offers a comprehensive and practical approach to developing AI
+          surveillance vehicles using IoT.</div>
+        <div class="links">
+          <a href="https://ieeexplore.ieee.org/document/10176395" target="_blank" rel="noopener">Read on IEEE Xplore</a>
+        </div>
+      </article>
+
+      <!-- Publication 3 -->
+      <article class="pub-card" id="p3">
+        <h2 class="pub-title">Paper Title: Implementation of IoT-Based Smart Irrigation System for Agricultural
+          Transformation</h2>
+        <div class="meta">Authors: Suraj Rao, Pradeep Kumar, Nishu Kumari, Anchal Choudhary, Abhishek Kumar Shukla —
+          Mentor: Prof. Ashish Bhateja — Conference: IEEE World Conference on Applied Intelligence and Computing (AIC
+          2023) — Date: October 2, 2023</div>
+        <div class="abstract">Abstract: This research presents an IoT-based irrigation method designed to transform
+          agricultural practices. The Internet of Things (IoT) is revolutionizing the agriculture industry by addressing
+          significant challenges faced by farmers. Our paper reviews existing IoT-based applications in agriculture and
+          introduces a user-friendly irrigation system utilizing Arduino UNO, a Bluetooth module, and a soil-moisture
+          sensor. Unlike previous complex systems, our solution emphasizes simplicity and ease of use for farmers. The
+          system enables real-time monitoring of soil moisture and allows farmers to set customized moisture thresholds
+          for different crops. When soil moisture drops below the set threshold, the system automatically activates
+          irrigation, helping to prevent both overwatering and underwatering, thereby improving agricultural efficiency.
+        </div>
+        <div class="links">
+          <a href="https://ieeexplore.ieee.org/document/10263854" target="_blank" rel="noopener">IEEE Conference
+            Publication</a>
+          <a href="https://drive.google.com/file/d/1isYL6yPwVyjRjM-gwNa6JYN7Ptrc8ZpB/view?usp=sharing" target="_blank"
+            rel="noopener">Certificate</a>
+        </div>
+      </article>
+
+      <!-- Publication 4 (Book) -->
+      <article class="pub-card" id="p4">
+        <h2 class="pub-title">Book Title: Interference Mitigation Techniques in Cellular Vehicle-to-Everything (CV2X)
+          Communications</h2>
+        <div class="meta">Author: Abhishek Kumar Shukla — Publisher: The Hill Publication — Publication Date: July 7,
+          2023</div>
+        <div class="abstract">Abstract: This book explores the pivotal role of interference mitigation in cellular
+          vehicle-to-everything (CV2X) communications, a key technology for modern transportation systems. It examines
+          the sources, types, and impacts of interference on CV2X performance, and provides a comprehensive analysis of
+          current mitigation techniques, including spectrum sharing, radio resource management, interference
+          cancellation, and traffic management. The book also addresses legislative and standardization challenges, and
+          discusses technical difficulties and opportunities in minimizing interference, especially in high-density and
+          heterogeneous networks. By delving into these complexities, the book offers valuable insights for advancing
+          CV2X communications and their applications in transportation.</div>
+        <div class="links">
+          <a href="https://books.google.co.in/books?hl=en&lr=&id=Tf3KEAAAQBAJ&oi=fnd&pg=PA26&dq=info:seVhKSXfW7gJ:scholar.google.com&ots=Cpq9EFLZfE&sig=Vl_m_0P3BpHbgbG0as4hq7smnlw&redir_esc=y#v=onepage&q&f=false"
+            target="_blank" rel="noopener">Read Online (Google Books)</a>
+        </div>
+      </article>
+
+      <!-- Publication 5 -->
+      <article class="pub-card" id="p5">
+        <h2 class="pub-title">Paper Title: Analysis of Inventory Turnover Performance within Indian Supermarket</h2>
+        <div class="meta">Author: Abhishek Kumar Shukla — Mentor: Prof. Ashish Bhateja — Publication – International
+          Conference on Recent Trends in Engineering and Science for Resource Optimization and Sustainable Development —
+          Conference Date: February 1, 2024</div>
+        <div class="abstract">Abstract: This study investigates inventory turnover performance in a Delhi-based retail
+          supermarket, analyzing both food and non-food product categories. It compares periodic and perpetual inventory
+          systems, ultimately employing a hybrid method based on available data. The research utilized secondary data
+          and qualitative methods to explore inventory tracking, transaction recording, and cost-of-goods calculations,
+          offering insights into inventory system selection for resource-constrained firms.</div>
+        <div class="links">
+          <a href="http://www.theresearchjournal.net/vol.-10-issue-1--se-.html" target="_blank"
+            rel="noopener">Conference Website</a>
+          <a href="http://www.theresearchjournal.net" target="_blank" rel="noopener">Paper URL: Read Full Paper</a>
+        </div>
+      </article>
+
+      <!-- Publication 6 (Award/ICUS2024) -->
+      <article class="pub-card" id="p6">
+        <h2 class="pub-title">3rd Rank at ICUS2024 — Best Paper Presentation</h2>
+        <div class="meta">Award – ICUS 2024 (Soft Computing Research Society) — Award Title: Best Paper Presentation –
+          3rd Rank (Communication and Control Systems) — Paper Title: Voice-Controlled Car Prototype: Advancing
+          Human-Machine Interface with NLP and Wireless Communication — Authors: Abhishek Kumar Shukla, Pakhi Kansal,
+          Jyoti Sharma — Organized by: Soft Computing Research Society — Date: March 1, 2024</div>
+        <div class="abstract">Summary: Our project presents a Voice-Controlled Car prototype aimed at filling the gap in
+          systematic evaluations of voice-controlled systems. The prototype utilizes Natural Language Processing (NLP)
+          techniques, and an Arduino UNO interfaced Bluetooth module for wireless communication with the "AMR Voice
+          Control" Android app. Through algorithmic processes, the system extracts and executes multiple voice commands
+          sequentially. Extensive testing with multiple phrases demonstrates strong performance in the Bluetooth range
+          (8.5–12 meters) and response accuracy. The prototype is capable of extracting commands like forward, backward,
+          stop, left and right form sentences. It follows all these commands one-by-one in a sequence. Additional
+          features include live streaming via an ESP32-CAM module and obstacle recognition using an ultrasonic sensor,
+          enhancing its practicality in real-world scenarios. This project offers an effective and practical
+          voice-activated solution for HMI applications, prioritizing usability and practicality.</div>
+        <div class="links">
+          <a href="https://www.publications.scrs.in/chapter/978-81-955020-8-0/1" target="_blank" rel="noopener">Award
+            Page / Publication</a>
+        </div>
+      </article>
+
+      <!-- Publication 7 (Voice-Controlled Car - Springer) -->
+      <article class="pub-card" id="p7">
+        <h2 class="pub-title">Paper Title: Enhancing Efficiency and Functionality of Voice-Controlled Cars Through NLP
+          Techniques and Additional Features</h2>
+        <div class="meta">Authors: Pakhi Kansal, Abhishek Kumar Shukla — Mentor: Er. Jai Parkash — Publication Date:
+          October 23, 2024 — Vanue: MIT - Sikkim</div>
+        <div class="abstract">Abstract: This research introduces a Voice-Controlled Car prototype that addresses the
+          existing literature gap in systematic evaluations of voice-controlled systems. The prototype employs Natural
+          Language Processing (NLP) techniques and an Arduino UNO-interfaced Bluetooth module to facilitate wireless
+          communication with a dedicated Android app, “AMR Voice Control.” Through an algorithmic process, the system
+          extracts and executes multiple voice commands sequentially. Strong performance in terms of Bluetooth range
+          (8.5–12 m). The effectiveness of the technique is demonstrated by the short processing times (2–7 ms) for
+          command extraction and execution times ranging from 8.95 to 21.08 s. The prototype was tested with 50
+          statements and demonstrated solid performance. The average execution time for six commands takes 20.11 s. The
+          prototype has extra features like live streaming via an ESP32-CAM module and obstacle recognition using an
+          ultrasonic sensor to increase its usefulness in real-world scenarios. Performance study uses Python and data
+          visualization tools to visualize the relationship between execution time and the number of instructions, which
+          offers valuable insights for future voice-controlled system optimizations.</div>
+        <div class="links">
+          <a href="https://link.springer.com/chapter/10.1007/978-981-97-6588-1_10" target="_blank" rel="noopener">Read
+            Online (Springer)</a>
+        </div>
+      </article>
+
+      <!-- Publication 8 (Railways) -->
+      <article class="pub-card" id="p8">
+        <h2 class="pub-title">Paper Title: Automating Indian Railway Services: A Face Recognition-Based Approach to
+          Queue Management and Ticket Booking</h2>
+        <div class="meta">Authors: Khushi Thakur, Manjeet Kumar, Samridhi — Mentor: Abhishek Kumar Shukla — Publication
+          Date: April 16, 2025 — Vanue: NIT (Bhopal)</div>
+        <div class="abstract">Abstract: This research presents a prototype software solution designed to streamline and
+          secure the Indian Railways' ticketing process, particularly for general class passengers. The study highlights
+          the inefficiencies in existing systems, including the absence of proper tracking for local travelers. The
+          proposed model integrates facial recognition technology to manage queues in offline booking areas and employs
+          automation to replace manual operations. The system ensures accurate passenger identification and booking,
+          enhancing both user experience and railway safety protocols.</div>
+        <div class="links">
+          <a href="https://ieeexplore.ieee.org/document/10960219" target="_blank" rel="noopener">Read on IEEE Xplore</a>
+          <a href="https://drive.google.com/file/d/16BcwbZ14l3xRRY1zYh8BoWyp_sPzSILb/view?usp=sharing" target="_blank"
+            rel="noopener">Certificate</a>
+        </div>
+      </article>
+
+      <!-- Publication 9 (Healthcare IoT) -->
+      <article class="pub-card" id="p9">
+        <h2 class="pub-title">Paper Title: Tackling the Overlooked Problem: A Novel Approach for Healthcare Systems by
+          IoT</h2>
+        <div class="meta">Publication – Rpinnacle Publisher (Journal of Advanced Computing and Visual Analytics, Volume
+          1, Issue 1) — Authors: Abhishek Kumar Shukla, Anant Yadav — Mentor: Priya Jyoti — Publication Date: January
+          24, 2025</div>
+        <div class="abstract">Abstract: This research paper addresses a significant literature gap in healthcare
+          monitoring systems by proposing a novel methodology that integrates weight monitoring into an Internet of
+          Things (IoT)-based framework. In the era of technological advancement, IoT serves as a powerful tool for
+          obtaining health-related data remotely. While existing studies have explored various IoT applications,
+          including connected cars and automated residences, the crucial parameter of patient weight has been overlooked
+          in current healthcare monitoring systems. The proposed methodology leverages the ESP8266 module for Wi-Fi
+          connectivity, facilitating seamless data transmission and remote monitoring capabilities. Key IoT applications
+          such as oxygen sensors, heart rate sensors, ECG modules, and temperature sensors are already established in
+          healthcare systems, but the incorporation of a weight sensor is essential for a holistic understanding of a
+          patient's overall health. Regular monitoring of weight provides valuable insights, enabling healthcare
+          providers to make informed decisions. Through the integration of a weight sensor, this research enhances the
+          capabilities of healthcare providers, allowing them to remotely access accurate and real-time weight
+          measurements alongside other vital signs. This comprehensive approach empowers healthcare professionals to
+          deliver more effective care, especially in remote settings where regular patient visits may be challenging.
+        </div>
+        <div class="links">
+          <a href="https://journal.rpinnacle.com/jacva/archive/v1i1/a2.html" target="_blank" rel="noopener">Journal
+            Archive</a>
+          <a href="https://journal.rpinnacle.com/jacva/archive/v1i1/a2/p2.pdf" target="_blank" rel="noopener">Full Paper
+            (PDF)</a>
+        </div>
+      </article>
+
+      <!-- Publication 10 (Track Maintenance IoT) -->
+      <article class="pub-card" id="p10">
+        <h2 class="pub-title">Paper Title: Improved Safety and Communication for Railway Track Maintenance Workers Using
+          IoT-Enabled Alert System</h2>
+        <div class="meta">Publication – Rpinnacle Publisher (Journal of Advanced Computing and Visual Analytics, Volume
+          1, Issue 1) — Author: Abhishek Kumar Shukla — Mentor: Prof. Ashish Bhateja — Publication Date: January 24,
+          2025</div>
+        <div class="abstract">Abstract: Railway stations often face critical safety challenges, especially at track and
+          platform edges during high-traffic hours. This study proposes an IoT-based alert system aimed at enhancing
+          safety and communication for railway track maintenance workers. The system addresses common issues like
+          insufficient training, poor communication between station masters and field workers, and high-risk exposure to
+          active tracks. By detecting track vibrations and notifying supervisors in real-time, the device significantly
+          lowers the risk of accidents. The paper details the design, testing, and real-world applicability of this IoT
+          solution in India’s extensive railway network. The proposed method achieved its objectives and demonstrated
+          the potential to reduce worker casualties and improve on-site awareness and response times.</div>
+        <div class="links">
+          <a href="https://journal.rpinnacle.com/jacva/archive/v1i1/a1.html" target="_blank" rel="noopener">Journal
+            Archive</a>
+          <a href="https://journal.rpinnacle.com/jacva/archive/v1i1/a1/p1.pdf" target="_blank" rel="noopener">Full Paper
+            (PDF)</a>
+        </div>
+      </article>
+
+    </main>
+
+    <footer>
+      Content above reproduces the certified publications list .
+    </footer>
+  </div>
+
+  <script>
+    // Simple scroll animation using IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target) }
+      })
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.pub-card').forEach(el => observer.observe(el));
+
+    // small header parallax while scrolling
+    const header = document.querySelector('header.page-header');
+    window.addEventListener('scroll', () => {
+      const sc = window.scrollY / 8;
+      header.style.transform = `translateY(${sc}px)`;
+      header.style.transition = 'transform 0.2s ease-out';
+    });
+  </script>
+</body>
+
+</html>

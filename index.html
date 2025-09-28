@@ -18,7 +18,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#mentors">Mentors</a></li>
-                <li><a href="#publications">Publications</a></li>
+                <li><a href="./publications.html">Publications</a></li>
                 <li><a href="#career">Career</a></li>
                 <li><a href="#membership">Membership</a></li>
                 <li><a href="#about">About Us</a></li>
@@ -33,7 +33,7 @@
             community engagement for a better tomorrow.</p>
         <div class="btn-group">
             <a href="#courses" class="btn btn-primary">Explore Courses</a>
-            <a href="#courses" class="btn btn-secondary">Explore Courses</a>
+            <a href="#contact" class="btn btn-secondary">Contact Us</a>
         </div>
     </section>
 
@@ -56,32 +56,65 @@
         <p>Gudsky receives grant for advanced AI research...</p>
     </section>
 
+
     <!-- Research -->
     <section id="publications" class="research">
-        <h2>Our Research</h2>
-        <p>A selection of our most recent publications from our talented team of researchers.</p>
-        <div class="cards">
-            <div class="card">
-                <div class="card-img"></div>
-                <h3>Title Name</h3>
-                <p>Author Name</p>
-                <a href="#">View More</a>
+        <div class="container">
+            <h2>Our Research</h2>
+
+            <!-- single lead line describing devotion -->
+            <p class="lead">
+                Gudsky Research Foundation is deeply devoted to advancing knowledge through collaborative, ethical,
+                and impact-driven research that addresses real-world challenges.
+            </p>
+
+            <!-- short organizational highlights -->
+            <div class="info-grid" aria-hidden="false">
+                <div class="info-card">
+                    <h3>Mission</h3>
+                    <p>To foster interdisciplinary research, equip emerging researchers, and translate ideas into
+                        societal
+                        impact.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Focus Areas</h3>
+                    <p>AI & ML, IoT & Embedded Systems, Sustainable Technologies, Human–Computer Interaction, and
+                        Transportation Systems.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Collaboration</h3>
+                    <p>We partner with universities, industry, and public bodies to co-create projects, internships and
+                        funding opportunities.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Open Calls</h3>
+                    <p>Periodic calls for proposals and student research internships — check our Opportunities page for
+                        current listings.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Transparency & Ethics</h3>
+                    <p>All projects follow ethical guidelines, with emphasis on reproducibility, data privacy, and open
+                        dissemination.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Get Involved</h3>
+                    <p>Want to collaborate or publish with us? Contact our research coordinator for partnership and
+                        publication queries.</p>
+                </div>
             </div>
-            <div class="card">
-                <div class="card-img"></div>
-                <h3>Title Name</h3>
-                <p>Author Name</p>
-                <a href="#">View More</a>
-            </div>
-            <div class="card">
-                <div class="card-img"></div>
-                <h3>Title Name</h3>
-                <p>Author Name</p>
-                <a href="#">View More</a>
+
+            <!-- CTA -->
+            <div class="cta-wrap">
+                <a href="publications.html" class="btn btn-primary">Explore Publications</a>
             </div>
         </div>
-        <a href="#" class="btn btn-primary">View All</a>
     </section>
+
 
     <!-- Beliefs -->
     <section class="beliefs">
@@ -144,7 +177,7 @@
 
         <div class="program reverse">
             <div class="program-content">
-                <h3>Professional Development</h3>
+                <h3>Machine Learning and Artificial Intelligence</h3>
                 <p>
                     Enhance your leadership, communication, and project management skills. These workshops
                     are designed for professionals seeking to advance their careers and lead with impact.
@@ -156,7 +189,7 @@
         <div class="program">
             <img src="./1186619.jpg" alt="Community Engagement">
             <div class="program-content">
-                <h3>Community Engagement</h3>
+                <h3>IoT and Embedded Systems</h3>
                 <p>
                     Join our initiatives to bring science and technology to the public. We believe in making
                     knowledge accessible and inspiring the next generation through outreach and collaborative
@@ -166,13 +199,6 @@
         </div>
     </section>
 
-    <!-- Stats & Contact -->
-    <!-- <section class="stats">
-        <div>650+ <br><small>Students Enrolled</small></div>
-        <div>40+ <br><small>Research Projects</small></div>
-        <div>30+ <br><small>Expert Faculty</small></div>
-        <div>20+ <br><small>Years Experience</small></div>
-    </section> -->
     <!-- Stats -->
     <section class="stats">
         <div class="stats-inner">
@@ -201,12 +227,13 @@
 
     <section class="contact">
         <h2>Collaborate with Us</h2>
-        <form>
-            <input type="text" placeholder="Full Name">
-            <input type="email" placeholder="Email Address">
-            <textarea placeholder="Message"></textarea>
+        <form id="contactForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <textarea id="message" placeholder="Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
+        <p id="responseMessage"></p>
     </section>
 
     <!-- Publishers -->
@@ -223,6 +250,28 @@
     <footer>
         <p>© 2025 Gudsky Research Foundation. All Rights Reserved.</p>
     </footer>
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            try {
+                const res = await fetch("http://localhost:5000/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fullName, email, message }),
+                });
+
+                const data = await res.json();
+                document.getElementById("responseMessage").innerText = data.message || data.error;
+            } catch (err) {
+                document.getElementById("responseMessage").innerText = "Something went wrong!";
+            }
+        });
+    </script>
 </body>
 
 </html>
