@@ -13,9 +13,16 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="./cropped-Gudsky-Research-1-278x93.png" alt="Gudsky Logo">
+                <img src="./images/cropped-Gudsky-Research-1-278x93.png" alt="Gudsky Logo">
             </div>
-            <ul class="nav-links">
+            <!-- Hamburger button (visible only on small screens) -->
+            <button class="hamburger" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="mainNav">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="mainNav">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#mentors">Mentors</a></li>
                 <li><a href="./publications.html">Publications</a></li>
@@ -46,7 +53,7 @@
                 challenges, fostering a culture of curiosity and continuous learning.</p>
         </div>
         <div class="about-logo">
-            <img src="./GudskyLOGO.png" alt="Gudsky Logo">
+            <img src="./images/GudskyLOGO.png" alt="Gudsky Logo">
         </div>
     </section>
 
@@ -136,7 +143,7 @@
     </section>
 
     <!-- Mentors -->
-    <section id="mentors" class="mentors">
+    <!--<section id="mentors" class="mentors">
         <h2>Our Mentors</h2>
         <div class="mentor-list">
             <div class="mentor">Mentor Name</div>
@@ -144,7 +151,7 @@
             <div class="mentor">Mentor Name</div>
             <div class="mentor">Mentor Name</div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Research Program -->
     <section class="program-banner">
@@ -163,7 +170,7 @@
         <h2>Our Programs</h2>
 
         <div class="program">
-            <img src="./03a0554ae1_50175403_data-analyst-data-scientist-formation-metier.jpg"
+            <img src="./images/03a0554ae1_50175403_data-analyst-data-scientist-formation-metier.jpg"
                 alt="Data Science & Analytics">
             <div class="program-content">
                 <h3>Data Science & Analytics</h3>
@@ -183,11 +190,11 @@
                     are designed for professionals seeking to advance their careers and lead with impact.
                 </p>
             </div>
-            <img src="./OIP.jpg" alt="Professional Development">
+            <img src="./images/OIP.jpg" alt="Professional Development">
         </div>
 
         <div class="program">
-            <img src="./1186619.jpg" alt="Community Engagement">
+            <img src="./images/1186619.jpg" alt="Community Engagement">
             <div class="program-content">
                 <h3>IoT and Embedded Systems</h3>
                 <p>
@@ -230,6 +237,7 @@
         <form id="contactForm">
             <input type="text" id="fullName" placeholder="Full Name" required>
             <input type="email" id="email" placeholder="Email Address" required>
+            <input type="number" id="phone_number" placeholder="Phone Number" required>
             <textarea id="message" placeholder="Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
@@ -240,10 +248,10 @@
     <section class="publishers">
         <h2>Our Publishers</h2>
         <div class="publisher-logos">
-            <img src="./National_Institute_of_Technology_Patna_Logo.png" alt="NIT">
-            <img src="./images-6.png" alt="IEEE">
-            <img src="./Logo_of_NIT_Jalandhar.png" alt="NIT Kurukshetra">
-            <img src="./Logo_of_NIT_Jalandhar.png" alt="IIT">
+            <img src="./images/National_Institute_of_Technology_Patna_Logo.png" alt="NIT">
+            <img src="./images/images-6.png" alt="IEEE">
+            <img src="./images/Logo_of_NIT_Jalandhar.png" alt="NIT Kurukshetra">
+            <img src="./images/SCRS.png" alt="SCRS">
         </div>
     </section>
 
@@ -251,26 +259,71 @@
         <p>© 2025 Gudsky Research Foundation. All Rights Reserved.</p>
     </footer>
     <script>
-        document.getElementById("contactForm").addEventListener("submit", async (e) => {
+        document.getElementById("contactForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            const fullName = document.getElementById("fullName").value;
-            const email = document.getElementById("email").value;
-            const message = document.getElementById("message").value;
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone_number = document.getElementById("phone_number").value.trim();
+            const message = document.getElementById("message").value.trim();
+            const responseEl = document.getElementById("responseMessage");
+
+            responseEl.innerText = "Sending...";
 
             try {
-                const res = await fetch("http://localhost:5000/api/contact", {
+                const res = await fetch("/api/contact.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ fullName, email, message }),
+                    body: JSON.stringify({ fullName, email, phone_number, message })
                 });
 
-                const data = await res.json();
-                document.getElementById("responseMessage").innerText = data.message || data.error;
+                const data = await res.json().catch(() => ({}));
+
+                if (!res.ok) {
+                    responseEl.innerText = (data.errors ? data.errors.join(' ') : data.message) || `Server error (${res.status})`;
+                    return;
+                }
+
+                responseEl.innerText = data.message || "Message sent!";
+                // optionally clear the form:
+                document.getElementById("contactForm").reset();
+
             } catch (err) {
-                document.getElementById("responseMessage").innerText = "Something went wrong!";
+                console.error("Network error:", err);
+                responseEl.innerText = "Network error — try again later.";
             }
         });
+        (function () {
+            const toggleBtn = document.getElementById('navToggle');
+            const nav = document.getElementById('mainNav');
+
+            if (!toggleBtn || !nav) return;
+
+            toggleBtn.addEventListener('click', function () {
+                const isOpen = nav.classList.toggle('open');
+                toggleBtn.classList.toggle('open', isOpen);
+                toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            // Close the menu when user taps a link (mobile UX)
+            nav.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A' && nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    toggleBtn.classList.remove('open');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Optional: close on ESC key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    toggleBtn.classList.remove('open');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.focus();
+                }
+            });
+        })();
     </script>
 </body>
 
